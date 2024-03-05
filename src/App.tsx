@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 
 function App() {
   return <main>
-    <section>
+    <section className='UI'>
       <TopBar />
       <Board />
       <Footer />
