@@ -26,8 +26,10 @@ function Board({ inputBoard }: Props) {
         if (selectedCell !== "" && !isNaN(Number(event.key))) {
             const newValue = event.key;
             const [rowIndex, colIndex] = selectedCell.split('-').map(Number);
-            boardState[rowIndex][colIndex] = newValue;
-            setBoardState(boardState);
+            // create a new updated board
+            const newBoardState = boardState.map(row => [...row]);
+            newBoardState[rowIndex][colIndex] = newValue;
+            setBoardState(newBoardState);
         }
     }
 
