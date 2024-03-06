@@ -5,8 +5,12 @@ interface Props {
 }
 
 function Cell({ value, active, setActive }: Props) {
+    const isFixed = value !== '.';
+
+    const classes = `cell ${active ? "active" : ""} ${isFixed ? "fixed" : ""}`;
+
     return (
-        <p className={active === true ? "cell active" : "cell"} onClick={setActive}>
+        <p className={classes} onClick={setActive}>
             {value !== '.' ? value : ''}
         </p>
     );

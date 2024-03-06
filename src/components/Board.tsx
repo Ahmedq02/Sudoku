@@ -9,7 +9,10 @@ function Board({ inputBoard }: Props) {
     const [selectedCell, setSelectedCell] = useState("");
 
     const handleCellClick = (key: string) => {
-        setSelectedCell(key);
+        const [rowIndex, colIndex] = key.split("-").map(Number);
+        if (inputBoard[rowIndex][colIndex] === ".") {
+            setSelectedCell(key);
+        }
     };
 
     return (
