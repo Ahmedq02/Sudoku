@@ -52,6 +52,10 @@ main {
   font-size: large;
 }
 
+.active {
+  background-color: beige;
+}
+
 .footer {
   grid-area: 11 / 1 / 12 / 10;
   display: flex;

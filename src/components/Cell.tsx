@@ -1,10 +1,14 @@
 interface Props {
     value: string;
+    active: boolean;
+    setActive: () => void;
 }
 
-function Cell({ value }: Props) {
+function Cell({ value, active, setActive }: Props) {
     return (
-        <p className="cell">{value !== '.' ? value : ''}</p>
+        <p className={active === true ? "cell active" : "cell"} onClick={setActive}>
+            {value !== '.' ? value : ''}
+        </p>
     );
 }
 

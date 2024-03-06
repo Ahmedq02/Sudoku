@@ -6,13 +6,22 @@ interface Props {
 }
 
 function Board({ inputBoard }: Props) {
-    const [selectedCell, setSelectedCell] = useState(-1);
+    const [selectedCell, setSelectedCell] = useState("");
+
+    const handleCellClick = (key: string) => {
+        setSelectedCell(key);
+    };
 
     return (
         <section className="board">
            {inputBoard.map((row, rowIndex) => (
             row.map((value, colIndex) => (
-            <Cell key={`${rowIndex}-${colIndex}`} value={value} />
+            <Cell
+                key={`${rowIndex}-${colIndex}`} 
+                value={value} 
+                setActive={() => handleCellClick(`${rowIndex}-${colIndex}`)}
+                active={selectedCell ===  `${rowIndex}-${colIndex}` ? true : false}
+            />
             ))
         ))}
         </section>
