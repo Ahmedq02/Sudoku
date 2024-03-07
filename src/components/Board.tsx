@@ -53,28 +53,30 @@ const getValidNums = (i: number, j: number, curState: string[][]) => {
     return valid;
 }
 
-// utility function to check if a cell is valid
-const isValidCell = (i: number, j: number, curState: string[][]) => {
-    const val = curState[i][j];
-    curState[i][j] = '.';
-    const validNums = getValidNums(i, j, curState);
-    curState[i][j] = val;
-    if (val === '.' || validNums.includes(val)) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
 function Board({ inputBoard }: Props) {
     const [selectedCell, setSelectedCell] = useState("");
     const [boardState, setBoardState] = useState(copyBoard(inputBoard));
+    let invalidState = false;
+
+    // utility function to check if a cell is valid
+    const isValidCell = (i: number, j: number, curState: string[][]) => {
+        const val = curState[i][j];
+        curState[i][j] = '.';
+        const validNums = getValidNums(i, j, curState);
+        curState[i][j] = val;
+        if (val === '.' || validNums.includes(val)) {
+            return true;
+        }
+        else {
+            invalidState = true;
+            return false;
+        }
+    }
 
     const handleCellClick = (key: string) => {
         // check that the clicked cell is not a fixed cell (if it is don't select it)
         const [rowIndex, colIndex] = key.split("-").map(Number);
-        if (inputBoard[rowIndex][colIndex] === ".") {
+        if (inputBoard[rowIndex][colIndex] === "." && !invalidState) {
             setSelectedCell(key);
         }
     };
