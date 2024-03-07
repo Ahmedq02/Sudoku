@@ -2,6 +2,7 @@ import Board from './components/Board';
 import './App.css';
 import TopBar from './components/TopBar';
 import Footer from './components/Footer';
+import { useState } from 'react';
 
 function App() {
   const inputBoard = [
@@ -16,11 +17,22 @@ function App() {
     [".",".",".",".","8",".",".","7","9"]
   ];
 
+  const [solverActive, setSolverActive] = useState(false);
+
+  const handleSolverButtonClick = () => {
+    setSolverActive(true);
+  }
+
   return <main>
     <section className='UI'>
       <TopBar />
-      <Board inputBoard={inputBoard}/>
-      <Footer />
+      <Board 
+        inputBoard={inputBoard}
+        solverActive={solverActive}
+      />
+      <Footer
+        onSolverButtonClick={handleSolverButtonClick}
+      />
     </section>
   </main>
 }

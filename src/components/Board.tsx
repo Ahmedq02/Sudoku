@@ -3,6 +3,7 @@ import Cell from "./Cell";
 
 interface Props {
     inputBoard: string[][];
+    solverActive: boolean;
 }
 
 // utility function to copy the board
@@ -53,7 +54,10 @@ const getValidNums = (i: number, j: number, curState: string[][]) => {
     return valid;
 }
 
-function Board({ inputBoard }: Props) {
+// global variable to track completion
+let boardComplete = false;
+
+function Board({ inputBoard, solverActive }: Props) {
     const [selectedCell, setSelectedCell] = useState("");
     const [boardState, setBoardState] = useState(copyBoard(inputBoard));
     let invalidState = false;
@@ -111,6 +115,19 @@ function Board({ inputBoard }: Props) {
         };
     }, [selectedCell, boardState])
 
+    useEffect(() => {
+        if (!invalidState) {
+            for (let i = 0 ; i < boardState.length ; i++) {
+                for (let j = 0 ; j < boardState[i].length ; j++) {
+                    if (boardState[i][j] === '.') {
+                        return;
+                    }        
+                }
+            }
+            boardComplete = true;
+        }
+    }, [boardState])
+
     return (
         <section className="board">
            {boardState.map((row, rowIndex) => (
@@ -123,6 +140,7 @@ function Board({ inputBoard }: Props) {
                 active={selectedCell ===  `${rowIndex}-${colIndex}` ? true : false}
                 fixed={inputBoard[rowIndex][colIndex] !== '.' ? true : false}
                 invalid={!isValidCell(rowIndex, colIndex, boardState)}
+                locked={solverActive}
             />
             ))
         ))}

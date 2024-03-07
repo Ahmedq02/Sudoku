@@ -10,7 +10,7 @@ main {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: linear-gradient(45deg, #D2B48C 50%, #BC8F8F 50%);
+  background-color: beige;
 }
 
 .UI {
@@ -41,7 +41,6 @@ main {
   grid-template-columns: repeat(9, 1fr);
   border: 2px solid black;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  background-color: #A9D6E5;
   color: white;
 }
 
@@ -72,6 +71,10 @@ main {
   background-color: pink;
 }
 
+.locked {
+  background-color: green;
+}
+
 .footer {
   grid-area: 11 / 1 / 12 / 10;
   display: flex;
@@ -86,4 +89,11 @@ main {
 
 .count {
   font-size: large;
+}
+
+.solver-button {
+  border-radius: 2rem;
+  background-color: beige;
+  font-size: large;
+  padding: 0.5rem;
 }
