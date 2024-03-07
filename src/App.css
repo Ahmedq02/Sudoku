@@ -75,11 +75,15 @@ main {
 .footer {
   grid-area: 11 / 1 / 12 / 10;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   border: 3px solid black;
   border-top: none;
   border-radius: 0 0 2rem 2rem;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   background-color: #A0522D;
+}
+
+.count {
+  font-size: large;
 }

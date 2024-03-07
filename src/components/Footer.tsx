@@ -1,5 +1,12 @@
+import Counter from "./Counter";
+
 function Footer() {
-    return <h1 className="footer">Get To Work!</h1>;
+    return (
+        <section className="footer">
+            <Counter />
+            <h1>Get To Work!</h1>
+        </section>
+    );
 }
 
 export default Footer;
