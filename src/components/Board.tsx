@@ -53,6 +53,20 @@ const getValidNums = (i: number, j: number, curState: string[][]) => {
     return valid;
 }
 
+// utility function to check if a cell is valid
+const isValidCell = (i: number, j: number, curState: string[][]) => {
+    const val = curState[i][j];
+    curState[i][j] = '.';
+    const validNums = getValidNums(i, j, curState);
+    curState[i][j] = val;
+    if (val === '.' || validNums.includes(val)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 function Board({ inputBoard }: Props) {
     const [selectedCell, setSelectedCell] = useState("");
     const [boardState, setBoardState] = useState(copyBoard(inputBoard));
@@ -89,11 +103,13 @@ function Board({ inputBoard }: Props) {
            {boardState.map((row, rowIndex) => (
             row.map((value, colIndex) => (
             <Cell
-                key={`${rowIndex}-${colIndex}`} 
+                key={`${rowIndex}-${colIndex}`}
+                loc={`${rowIndex}-${colIndex}`}
                 value={value} 
                 setActive={() => handleCellClick(`${rowIndex}-${colIndex}`)}
                 active={selectedCell ===  `${rowIndex}-${colIndex}` ? true : false}
                 fixed={inputBoard[rowIndex][colIndex] !== '.' ? true : false}
+                invalid={!isValidCell(rowIndex, colIndex, boardState)}
             />
             ))
         ))}
