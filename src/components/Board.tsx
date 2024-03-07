@@ -80,9 +80,20 @@ function Board({ inputBoard }: Props) {
     };
 
     const handleKeyPress = (event: KeyboardEvent) => {
-        // check that a cell is selected and the input is a number
-        if (selectedCell !== "" && !isNaN(Number(event.key))) {
-            const newValue = event.key;
+        // check that a cell is selected
+        if (selectedCell !== "") {
+            let newValue;
+            // backspace is used to set a cell to blank
+            if (event.key === 'Backspace') {
+                newValue = '.';
+            }
+            // otherwise a number 1-9 will be accepted as input
+            else if (!isNaN(Number(event.key)) && event.key !== '0') {
+                newValue = event.key;
+            }
+            else {
+                return;
+            }
             const [rowIndex, colIndex] = selectedCell.split('-').map(Number);
             // create a new updated board
             const newBoardState = boardState.map(row => [...row]);
