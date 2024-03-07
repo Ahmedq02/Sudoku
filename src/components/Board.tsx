@@ -62,6 +62,53 @@ function Board({ inputBoard, solverActive }: Props) {
     const [boardState, setBoardState] = useState(copyBoard(inputBoard));
     let invalidState = false;
 
+    // the backtracking solver algorithm 
+    const solve = () => {
+        // find the first empty cell
+        let empty = false;
+        let rowIndex = 0;
+        let colIndex = 0;
+
+        for (let i = 0 ; i < boardState.length ; i++) {
+            for (let j = 0 ; j < boardState[i].length ; j++) {
+                if (boardState[i][j] === '.') {
+                    empty = true;
+                    rowIndex = i;
+                    colIndex = j;
+                    break;
+                }
+            }
+            if (empty) {
+                break;
+            }
+        }
+
+        if (!empty) {
+            return true;
+        }
+
+        // return the possible values for the cell being considered
+        let validNums = getValidNums(rowIndex, colIndex, boardState);
+        // if there are no valid squares it is a dead end -> backtrack
+        if (validNums.length === 0) {
+            return false;
+        }
+
+        for (let k = 0 ; k < validNums.length ; k++) {
+            const curNum = validNums[k];
+            boardState[rowIndex][colIndex] = curNum; 
+            let res = solve();
+            if (res) {
+                return true;
+            }
+            boardState[rowIndex][colIndex] = '.'
+        }
+    }
+
+    if (solverActive) {
+        solve();
+    }
+
     // utility function to check if a cell is valid
     const isValidCell = (i: number, j: number, curState: string[][]) => {
         const val = curState[i][j];
@@ -80,7 +127,7 @@ function Board({ inputBoard, solverActive }: Props) {
     const handleCellClick = (key: string) => {
         // check that the clicked cell is not a fixed cell (if it is don't select it)
         const [rowIndex, colIndex] = key.split("-").map(Number);
-        if (inputBoard[rowIndex][colIndex] === "." && !invalidState) {
+        if (inputBoard[rowIndex][colIndex] === "." && !invalidState && !solverActive) {
             setSelectedCell(key);
         }
     };
