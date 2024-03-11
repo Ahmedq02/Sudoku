@@ -108,6 +108,13 @@ function Board({ inputBoard, solverActive, deactivateSolver }: Props) {
 
     useEffect(() => {
         if (solverActive) {
+            // reset the board
+            for (let i = 0 ; i < boardState.length ; i++) {
+                for (let j = 0 ; j < boardState[i].length ; j++) {
+                    boardState[i][j] = inputBoard[i][j];  
+                }
+            }
+            // solve the board and deactivate the solver
             solve();
             deactivateSolver();
         }
