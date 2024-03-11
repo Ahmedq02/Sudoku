@@ -23,12 +23,17 @@ function App() {
     setSolverActive(true);
   }
 
+  const deactivateSolver = () => {
+    setSolverActive(false);
+  }
+
   return <main>
     <section className='UI'>
       <TopBar />
       <Board 
         inputBoard={inputBoard}
         solverActive={solverActive}
+        deactivateSolver={deactivateSolver}
       />
       <Footer
         onSolverButtonClick={handleSolverButtonClick}

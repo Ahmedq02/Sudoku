@@ -4,6 +4,7 @@ import Cell from "./Cell";
 interface Props {
     inputBoard: string[][];
     solverActive: boolean;
+    deactivateSolver: () => void;
 }
 
 // utility function to copy the board
@@ -57,7 +58,7 @@ const getValidNums = (i: number, j: number, curState: string[][]) => {
 // global variable to track completion
 let boardComplete = false;
 
-function Board({ inputBoard, solverActive }: Props) {
+function Board({ inputBoard, solverActive, deactivateSolver }: Props) {
     const [selectedCell, setSelectedCell] = useState("");
     const [boardState, setBoardState] = useState(copyBoard(inputBoard));
     let invalidState = false;
@@ -105,9 +106,12 @@ function Board({ inputBoard, solverActive }: Props) {
         }
     }
 
-    if (solverActive) {
-        solve();
-    }
+    useEffect(() => {
+        if (solverActive) {
+            solve();
+            deactivateSolver();
+        }
+    }, [solverActive]);
 
     // utility function to check if a cell is valid
     const isValidCell = (i: number, j: number, curState: string[][]) => {
