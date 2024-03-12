@@ -3,15 +3,24 @@ import SolverButton from "./SolverButton";
 
 interface Props {
     onSolverButtonClick: () => void;
+    boardComplete: boolean
 }
 
-function Footer({onSolverButtonClick}: Props) {
+function Footer({onSolverButtonClick, boardComplete}: Props) {
     return (
-        <section className="footer">
-            <Counter />
-            <h1>Get To Work!</h1>
-            <SolverButton onSolverButtonClick={onSolverButtonClick}/>
-        </section>
+        <>
+            { boardComplete ? (
+                <section className="footer complete">
+                    <h1>You Did It!</h1>
+                </section>
+            ) : (
+                <section className="footer">
+                    <Counter />
+                    <h1>Get To Work!</h1>
+                    <SolverButton onSolverButtonClick={onSolverButtonClick}/>
+                </section>
+            )}
+        </>
     );
 }
 

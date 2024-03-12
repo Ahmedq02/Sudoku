@@ -5,6 +5,8 @@ interface Props {
     inputBoard: string[][];
     solverActive: boolean;
     deactivateSolver: () => void;
+    boardComplete: boolean;
+    handleBoardCompletion: () => void;
 }
 
 // utility function to copy the board
@@ -55,10 +57,7 @@ const getValidNums = (i: number, j: number, curState: string[][]) => {
     return valid;
 }
 
-// global variable to track completion
-let boardComplete = false;
-
-function Board({ inputBoard, solverActive, deactivateSolver }: Props) {
+function Board({ inputBoard, solverActive, deactivateSolver, boardComplete, handleBoardCompletion }: Props) {
     const [selectedCell, setSelectedCell] = useState("");
     const [boardState, setBoardState] = useState(copyBoard(inputBoard));
     let invalidState = false;
@@ -100,7 +99,7 @@ function Board({ inputBoard, solverActive, deactivateSolver }: Props) {
             currentState[rowIndex][colIndex] = curNum;
             setBoardState(copyBoard(currentState));
 
-            await new Promise(resolve => setTimeout(resolve, 10));
+            await new Promise(resolve => setTimeout(resolve, 1));
 
             let res = await solve(currentState);
             if (res) {
@@ -187,7 +186,7 @@ function Board({ inputBoard, solverActive, deactivateSolver }: Props) {
                     }        
                 }
             }
-            boardComplete = true;
+            handleBoardCompletion();
         }
     }, [boardState])
 
@@ -203,7 +202,7 @@ function Board({ inputBoard, solverActive, deactivateSolver }: Props) {
                 active={selectedCell ===  `${rowIndex}-${colIndex}` ? true : false}
                 fixed={inputBoard[rowIndex][colIndex] !== '.' ? true : false}
                 invalid={!isValidCell(rowIndex, colIndex, boardState)}
-                locked={solverActive}
+                locked={boardComplete}
             />
             ))
         ))}

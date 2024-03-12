@@ -18,9 +18,14 @@ function App() {
   ];
 
   const [solverActive, setSolverActive] = useState(false);
+  const [boardComplete, setBoardComplete] = useState(false);
 
   const handleSolverButtonClick = () => {
     setSolverActive(true);
+  }
+
+  const handleBoardCompletion = () => {
+    setBoardComplete(true);
   }
 
   const deactivateSolver = () => {
@@ -29,14 +34,19 @@ function App() {
 
   return <main>
     <section className='UI'>
-      <TopBar />
+      <TopBar
+        boardComplete={boardComplete}
+      />
       <Board 
         inputBoard={inputBoard}
         solverActive={solverActive}
         deactivateSolver={deactivateSolver}
+        boardComplete={boardComplete}
+        handleBoardCompletion={handleBoardCompletion}
       />
       <Footer
         onSolverButtonClick={handleSolverButtonClick}
+        boardComplete={boardComplete}
       />
     </section>
   </main>
