@@ -64,15 +64,15 @@ function Board({ inputBoard, solverActive, deactivateSolver }: Props) {
     let invalidState = false;
 
     // the backtracking solver algorithm 
-    const solve = () => {
+    const solve = async (currentState: string[][]) => {
         // find the first empty cell
         let empty = false;
         let rowIndex = 0;
         let colIndex = 0;
 
-        for (let i = 0 ; i < boardState.length ; i++) {
-            for (let j = 0 ; j < boardState[i].length ; j++) {
-                if (boardState[i][j] === '.') {
+        for (let i = 0 ; i < currentState.length ; i++) {
+            for (let j = 0 ; j < currentState[i].length ; j++) {
+                if (currentState[i][j] === '.') {
                     empty = true;
                     rowIndex = i;
                     colIndex = j;
@@ -89,7 +89,7 @@ function Board({ inputBoard, solverActive, deactivateSolver }: Props) {
         }
 
         // return the possible values for the cell being considered
-        let validNums = getValidNums(rowIndex, colIndex, boardState);
+        let validNums = getValidNums(rowIndex, colIndex, currentState);
         // if there are no valid squares it is a dead end -> backtrack
         if (validNums.length === 0) {
             return false;
@@ -97,12 +97,17 @@ function Board({ inputBoard, solverActive, deactivateSolver }: Props) {
 
         for (let k = 0 ; k < validNums.length ; k++) {
             const curNum = validNums[k];
-            boardState[rowIndex][colIndex] = curNum; 
-            let res = solve();
+            currentState[rowIndex][colIndex] = curNum;
+            setBoardState(copyBoard(currentState));
+
+            await new Promise(resolve => setTimeout(resolve, 10));
+
+            let res = await solve(currentState);
             if (res) {
                 return true;
             }
-            boardState[rowIndex][colIndex] = '.'
+            currentState[rowIndex][colIndex] = '.'
+            setBoardState(copyBoard(currentState));
         }
     }
 
@@ -115,7 +120,7 @@ function Board({ inputBoard, solverActive, deactivateSolver }: Props) {
                 }
             }
             // solve the board and deactivate the solver
-            solve();
+            solve(copyBoard(boardState));
             deactivateSolver();
         }
     }, [solverActive]);
