@@ -4,6 +4,8 @@ import TopBar from './components/TopBar';
 import Footer from './components/Footer';
 import { useState } from 'react';
 import easySudokuBoards from './easySudoku';
+import mediumSudokuBoards from './mediumSudoku';
+import hardSudokuBoards from './hardSudoku';
 
 function App() {
   const defaultBoard = [
@@ -18,11 +20,26 @@ function App() {
     [".",".",".",".","8",".",".","7","9"]
   ];
 
-  const randomIndex = Math.floor(Math.random() * easySudokuBoards.length);
-  const inputBoard = easySudokuBoards[randomIndex];
-
   const [solverActive, setSolverActive] = useState(false);
   const [boardComplete, setBoardComplete] = useState(false);
+
+  const getBoard = (difficulty: number) => {
+    if (difficulty == 1) {
+      const randomIndex = Math.floor(Math.random() * easySudokuBoards.length);
+      return easySudokuBoards[randomIndex];
+    }
+    else if (difficulty == 2) {
+      const randomIndex = Math.floor(Math.random() * mediumSudokuBoards.length);
+      return mediumSudokuBoards[randomIndex];
+    }
+    else {
+      const randomIndex = Math.floor(Math.random() * hardSudokuBoards.length);
+      return hardSudokuBoards[randomIndex];
+    }
+  }
+
+  const difficulty = 3;
+  const inputBoard = getBoard(difficulty);
 
   const handleSolverButtonClick = () => {
     setSolverActive(true);
