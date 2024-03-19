@@ -99,7 +99,7 @@ function Board({ inputBoard, solverActive, deactivateSolver, boardComplete, hand
             currentState[rowIndex][colIndex] = curNum;
             setBoardState(copyBoard(currentState));
 
-            await new Promise(resolve => setTimeout(resolve, 1));
+            await new Promise(resolve => setTimeout(resolve, 0.01));
 
             let res = await solve(currentState);
             if (res) {
@@ -189,6 +189,13 @@ function Board({ inputBoard, solverActive, deactivateSolver, boardComplete, hand
             handleBoardCompletion();
         }
     }, [boardState])
+
+    useEffect (() => {
+        if (!boardComplete) {
+            // reset the board
+            setBoardState(copyBoard(inputBoard));
+        }
+    }, [boardComplete])
 
     return (
         <section className="board">

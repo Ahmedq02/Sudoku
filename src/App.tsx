@@ -24,6 +24,10 @@ function App() {
     setSolverActive(true);
   }
 
+  const handleResetButtonClick = () => {
+    setBoardComplete(false);
+  }
+
   const handleBoardCompletion = () => {
     setBoardComplete(true);
   }
@@ -46,6 +50,7 @@ function App() {
       />
       <Footer
         onSolverButtonClick={handleSolverButtonClick}
+        onResetButtonClick={handleResetButtonClick}
         boardComplete={boardComplete}
       />
     </section>

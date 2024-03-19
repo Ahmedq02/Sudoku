@@ -105,3 +105,10 @@ main {
   font-size: large;
   padding: 0.5rem;
 }
+
+.reset-button {
+  border-radius: 2rem;
+  background-color: turquoise;
+  font-size: large;
+  padding: 0.5rem;
+}

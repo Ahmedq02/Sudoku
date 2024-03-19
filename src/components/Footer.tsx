@@ -1,17 +1,20 @@
 import Counter from "./Counter";
+import ResetButton from "./ResetButton";
 import SolverButton from "./SolverButton";
 
 interface Props {
     onSolverButtonClick: () => void;
-    boardComplete: boolean
+    onResetButtonClick: () => void;
+    boardComplete: boolean;
 }
 
-function Footer({onSolverButtonClick, boardComplete}: Props) {
+function Footer({onSolverButtonClick, onResetButtonClick, boardComplete}: Props) {
     return (
         <>
             { boardComplete ? (
                 <section className="footer complete">
                     <h1>You Did It!</h1>
+                    <ResetButton onResetButtonClick={onResetButtonClick}/>
                 </section>
             ) : (
                 <section className="footer">
