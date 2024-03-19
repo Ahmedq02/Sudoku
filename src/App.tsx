@@ -3,9 +3,10 @@ import './App.css';
 import TopBar from './components/TopBar';
 import Footer from './components/Footer';
 import { useState } from 'react';
+import easySudokuBoards from './easySudoku';
 
 function App() {
-  const inputBoard = [
+  const defaultBoard = [
     ["5","3",".",".","7",".",".",".","."],
     ["6",".",".","1","9","5",".",".","."],
     [".","9","8",".",".",".",".","6","."],
@@ -16,6 +17,9 @@ function App() {
     [".",".",".","4","1","9",".",".","5"],
     [".",".",".",".","8",".",".","7","9"]
   ];
+
+  const randomIndex = Math.floor(Math.random() * easySudokuBoards.length);
+  const inputBoard = easySudokuBoards[randomIndex];
 
   const [solverActive, setSolverActive] = useState(false);
   const [boardComplete, setBoardComplete] = useState(false);
