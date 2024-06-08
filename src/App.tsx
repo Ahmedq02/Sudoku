@@ -2,7 +2,7 @@ import Board from './components/Board';
 import './App.css';
 import TopBar from './components/TopBar';
 import Footer from './components/Footer';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import easySudokuBoards from './easySudoku';
 import mediumSudokuBoards from './mediumSudoku';
 import hardSudokuBoards from './hardSudoku';
@@ -38,8 +38,8 @@ function App() {
     }
   }
 
-  const difficulty = 3;
-  const inputBoard = getBoard(difficulty);
+  const difficulty = 1;
+  const inputBoard = useRef(getBoard(difficulty));
 
   const handleSolverButtonClick = () => {
     setSolverActive(true);
@@ -63,7 +63,7 @@ function App() {
         boardComplete={boardComplete}
       />
       <Board 
-        inputBoard={inputBoard}
+        inputBoard={inputBoard.current}
         solverActive={solverActive}
         deactivateSolver={deactivateSolver}
         boardComplete={boardComplete}

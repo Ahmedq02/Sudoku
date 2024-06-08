@@ -99,7 +99,7 @@ function Board({ inputBoard, solverActive, deactivateSolver, boardComplete, hand
             currentState[rowIndex][colIndex] = curNum;
             setBoardState(copyBoard(currentState));
 
-            await new Promise(resolve => setTimeout(resolve, 0.01));
+            await new Promise(resolve => setTimeout(resolve, 0.0));
 
             let res = await solve(currentState);
             if (res) {
@@ -115,7 +115,8 @@ function Board({ inputBoard, solverActive, deactivateSolver, boardComplete, hand
             // reset the board
             for (let i = 0 ; i < boardState.length ; i++) {
                 for (let j = 0 ; j < boardState[i].length ; j++) {
-                    boardState[i][j] = inputBoard[i][j];  
+                    boardState[i][j] = inputBoard[i][j];
+                    console.log(boardState[i][j]);  
                 }
             }
             // solve the board and deactivate the solver

@@ -19,7 +19,6 @@ function Footer({onSolverButtonClick, onResetButtonClick, boardComplete}: Props)
             ) : (
                 <section className="footer">
                     <Counter />
-                    <h1>Get To Work!</h1>
                     <SolverButton onSolverButtonClick={onSolverButtonClick}/>
                 </section>
             )}
