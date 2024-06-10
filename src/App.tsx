@@ -89,7 +89,7 @@ function App() {
   else {
     return (
       <main>
-        <section className='UI'>
+        <section className='difficulty'>
           <DifficultySelect
             onDifficultyButtonClick={handleDifficultyButtonClick}
           />

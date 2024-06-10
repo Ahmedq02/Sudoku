@@ -1,3 +1,7 @@
+:root {
+  --main-box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -111,4 +115,62 @@ main {
   background-color: turquoise;
   font-size: large;
   padding: 0.5rem;
+}
+
+.difficulty {
+  background-color: #0fa4af;
+  height: 660px;
+  width: 540px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 5rem;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--main-box-shadow);
+}
+
+.difficulty h1 {
+  color: white;
+  font-size: 2.5rem;
+}
+
+.diff-btn {
+  width: 200px;
+  height: 50px;
+  border-radius: 2rem;
+  font-size: large;
+  border: none;
+  color: white;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border 0.1s ease-in-out;
+}
+
+.diff-btn.easy {
+  background-color: #acdf87;
+}
+
+.diff-btn.easy:hover {
+  background-color: white;
+  color: #acdf87;
+  border: solid 2px #acdf87;
+}
+
+.diff-btn.medium {
+  background-color: #ffb76b;
+}
+
+.diff-btn.medium:hover {
+  background-color: white;
+  color: #ffb76b;
+  border: solid 2px #ffb76b;
+}
+
+.diff-btn.hard {
+  background-color: #ff5252;
+}
+
+.diff-btn.hard:hover {
+  background-color: white;
+  color: #ff5252;
+  border: solid 2px #ff5252;
 }

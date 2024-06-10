@@ -4,18 +4,18 @@ interface Props {
 
 function DifficultySelect({ onDifficultyButtonClick }: Props) {
     return (
-    <section className="difficulty">
-        <h1>Choose your difficulty</h1>
-        <button onClick={() => onDifficultyButtonClick(1)}>
-            Easy
-        </button>
-        <button onClick={() => onDifficultyButtonClick(2)}>
-            Medium
-        </button>
-        <button onClick={() => onDifficultyButtonClick(3)}>
-            Hard
-        </button>
-    </section>
+        <>
+            <h1>Choose your difficulty</h1>
+            <button className="diff-btn easy" onClick={() => onDifficultyButtonClick(1)}>
+                Easy
+            </button>
+            <button className="diff-btn medium" onClick={() => onDifficultyButtonClick(2)}>
+                Medium
+            </button>
+            <button className="diff-btn hard" onClick={() => onDifficultyButtonClick(3)}>
+                Hard
+            </button>
+        </>
     );
 }
 
