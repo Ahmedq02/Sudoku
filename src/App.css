@@ -1,5 +1,10 @@
 :root {
   --main-box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  --dark--100: #121212;
+  --dark--200: #282828;
+  --dark--300: #3f3f3f;
+  --primary--500: #a688fa;
+  --primary--600: #ba9ffb;
 }
 
 * {
@@ -9,12 +14,16 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+html {
+  font-size: 20px;
+}
+
 main {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: beige;
+  background-color: var(--dark--100);
 }
 
 .UI {
@@ -23,7 +32,7 @@ main {
   grid-template-columns: repeat(9, 1fr);
   height: 660px;
   width: 540px;
-  color: black;
+  color: white;
 }
 
 .top-bar {
@@ -31,24 +40,18 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 3px solid black;
-  border-bottom: none;
-  border-radius: 2rem 2rem 0 0;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  background-color: #A0522D;
-}
-
-.top-bar.complete {
-  background-color: aquamarine;
+  margin-bottom: 0.25rem;
+  background-color: var(--dark--200);
+  font-size: 1.618rem;
+  border-radius: 0.25rem;
 }
 
 .board {
   grid-area: 2 / 1 / 11 / 10;
   display: grid;
+  gap: 0.25rem;
   grid-template-rows: repeat(9, 1fr);
   grid-template-columns: repeat(9, 1fr);
-  border: 2px solid black;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   color: white;
 }
 
@@ -58,29 +61,26 @@ main {
   justify-content: center;
   width: 100%;
   height: 100%;
-  border: 2px solid black;
-  font-size: large;
-  background-color: #D2B48C;
+  font-size: 1rem;
+  background-color: var(--dark--200);
+  color: white;
+  border-radius: 0.25rem;
 }
 
 .even {
-  background-color: #BC8F8F;
+  background-color: var(--dark--300);
 }
 
 .active {
-  border: 2px solid lightcyan;
+  border: 2px solid var(--primary--500);
 }
 
 .fixed {
-  color: black;
+  color: var(--primary--500);
 }
 
 .invalid {
-  background-color: pink;
-}
-
-.locked {
-  background-color: lightgreen;
+  background-color: #ffe4ed
 }
 
 .footer {
@@ -88,33 +88,28 @@ main {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border: 3px solid black;
-  border-top: none;
-  border-radius: 0 0 2rem 2rem;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  background-color: #A0522D;
-}
-
-.footer.complete {
-  background-color: aquamarine;
+  margin-top: 0.25rem;
+  background-color: var(--dark--200);
+  border-radius: 0.25rem;
 }
 
 .count {
-  font-size: large;
+  font-size: 1rem;
 }
 
-.solver-button {
-  border-radius: 2rem;
-  background-color: beige;
-  font-size: large;
+.solver-button, .reset-button {
+  border-radius: 1rem;
+  border: none;
+  background-color: var(--primary--500);
+  font-size: 1rem;
   padding: 0.5rem;
+  margin: 0.5rem;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
-.reset-button {
-  border-radius: 2rem;
-  background-color: turquoise;
-  font-size: large;
-  padding: 0.5rem;
+.solver-button:hover, .reset-button:hover {
+  background-color: var(--dark--300);
+  color: white;
 }
 
 .difficulty {
